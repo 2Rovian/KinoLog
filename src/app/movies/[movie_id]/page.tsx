@@ -4,6 +4,8 @@ import { BsCalendar2DateFill } from "react-icons/bs";
 import { CiBookmark } from "react-icons/ci";
 
 import Link from "next/link";
+import NotFoundPage from '@/app/not-found';
+
 
 export default async function MovieDetails({
     params,
@@ -12,11 +14,14 @@ export default async function MovieDetails({
 }) {
     const { movie_id } = await params;
     const response = await fetch(`https://api.themoviedb.org/3/movie/${movie_id}?api_key=${process.env.NEXT_PUBLIC_TMDB_API_KEY}&language=en-US`);
+    if (!response.ok) {
+        return (<NotFoundPage />);
+    }
     const movieData = await response.json();
-
+    
     return (
-        <div className="max-w-7xl mx-auto px-4 py-12 text-white">
-            <section className="grid grid-cols-1 md:grid-cols-3 gap-8 items-start mt-10">
+        <div className="max-w-7xl mx-auto px-4 pb-12 text-white">
+            <section className="grid grid-cols-1 md:grid-cols-3 gap-8 items-start mt-20">
                 {/* Poster do filme */}
                 <div className="w-full rounded-xl overflow-hidden shadow-lg relative group hover:outline-2 hover:outline-zinc-100 hover:shadow-lg hover-transition">
                     <Image
@@ -63,7 +68,7 @@ export default async function MovieDetails({
                         {movieData.overview}
                     </p>
 
-                    
+
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
                         {/* Left Column */}

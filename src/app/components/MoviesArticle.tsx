@@ -36,17 +36,22 @@ export default function MoviesArticle({ movie, index }: any) {
             <div className='absolute top-1 right-1 bg-zinc-950 px-2 py-1 rounded-xl flex items-center z-50'>
                 <span className="flex gap-x-1 items-center text-amber-500">
                     <FaStar />
-                    {(movie.vote_average).toFixed(1)}
+                    
+                    {movie.vote_average === 0
+                        ? "N/A"
+                        : movie.vote_average.toFixed(1)}
+
                 </span>
             </div>
             <div className='absolute inset-0 bg-zinc-950/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-40' />
 
             <div className='absolute inset-0 flex items-center justify-center gap-x-4 text-zinc-200 text-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-50'>
-                <Link href={`/movies/${movie.id}`}>
+                <Link href={`${"name" in movie ? `/series/${movie.id}` : `/movies/${movie.id}`}`}>
                     <span className="cursor-pointer hover:text-white transition-colors">
                         <FaInfoCircle />
                     </span>
                 </Link>
+
                 <span className="cursor-pointer hover:text-white transition-colors">
                     <CiBookmark />
                 </span>

@@ -11,7 +11,7 @@ export default function Navbar() {
         { title: "About", link_page: "/about" }
     ]
     return (
-        <header className="h-fit fixed top-0 z-50 w-full right-0 left-0 bg-gradient-to-b from-black/70 to-transparent">
+        <header className="h-fit fixed top-0 z-[100] w-full right-0 left-0 bg-gradient-to-b from-black/95 to-transparent">
             <nav className="max-w-7xl mx-auto flex  flex-col gap-y-2 p-4 ">
             {/* old navbar */}
             {/* nav className="max-w-7xl lg:outline-1 lg:outline-slate-900/70 lg:rounded-b-md mx-auto flex bg-black/40 backdrop-blur-lg flex-col gap-y-2 p-4" */}
