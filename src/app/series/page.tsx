@@ -243,7 +243,7 @@ export default function SeriesPage() {
 
                     {(isLoading || isFetchingMore) && (
                         <div className="col-span-full flex justify-center py-10">
-                            <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-amber-500"></div>
+                            <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-zinc-100"></div>
                         </div>
                     )}
 
