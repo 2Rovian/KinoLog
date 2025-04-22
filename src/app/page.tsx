@@ -1,9 +1,9 @@
-import Image from "next/image";
 import MovieBanner from "./components/(home)/MovieBanner";
 import TrendingMovies from "./components/(home)/TrendingMovies";
 import PopularShows from "./components/(home)/PopularShows";
 import TopRatedMovies from "./components/(home)/TopRatedMovies";
-
+import GenreExplorer from "./components/(home)/GenreExplorer";
+// import Footer from "./components/(home)/Footer";
 
 export default function Home() {
   return (
@@ -13,6 +13,8 @@ export default function Home() {
         <TrendingMovies />
         <PopularShows />
         <TopRatedMovies />
+        {/* <Footer /> */}
+        <GenreExplorer />
       </main>
     </div>
   );

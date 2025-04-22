@@ -11,8 +11,8 @@ export default async function PopularShows() {
 
     return (
         <section>
-            <div className="flex justify-between items-center ">
-                <h2 className='text-xl lg:text-3xl font-semibold mb-3'>Popular Shows</h2>
+            <div className="flex justify-between items-center mb-3">
+                <h2 className='text-xl lg:text-3xl font-semibold '>Popular Shows</h2>
                 <Link href={"/popular-shows"}>
                     <div className="flex gap-x-1 items-center text-zinc-400 cursor-pointer hover:text-zinc-300 hover-transition">
                         <span>See More</span>

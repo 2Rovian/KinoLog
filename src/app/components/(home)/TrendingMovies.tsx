@@ -9,8 +9,8 @@ export default async function TrendingMovies() {
 
     return (
         <section>
-            <div className="flex justify-between items-center ">
-                <h2 className='text-xl lg:text-3xl font-semibold mb-3'>Trending Movies</h2>
+            <div className="flex justify-between items-center mb-3">
+                <h2 className='text-xl lg:text-3xl font-semibold '>Trending Movies</h2>
                 <Link href={"/trending-movies"}>
                     <div className="flex gap-x-1 items-center text-zinc-400 cursor-pointer hover:text-zinc-300 hover-transition">
                         <span>See More</span>
