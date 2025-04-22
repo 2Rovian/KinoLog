@@ -41,9 +41,6 @@ export default function NotFoundPage() {
                     </button>
                 </Link>
 
-                <p className="mt-8 text-sm text-zinc-500">
-                    Error code: 404 - Resource Not Found
-                </p>
             </MotionDiv>
         </div>
     );
