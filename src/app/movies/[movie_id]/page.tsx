@@ -5,7 +5,7 @@ import { CiBookmark } from "react-icons/ci";
 
 import Link from "next/link";
 import NotFoundPage from '@/app/not-found';
-
+import { CiImageOff } from "react-icons/ci";
 
 export default async function MovieDetails({
     params,
@@ -18,19 +18,33 @@ export default async function MovieDetails({
         return (<NotFoundPage />);
     }
     const movieData = await response.json();
-    
+
     return (
         <div className="max-w-7xl mx-auto px-4 pb-12 text-white">
             <section className="grid grid-cols-1 md:grid-cols-3 gap-8 items-start mt-20">
                 {/* Poster do filme */}
                 <div className="w-full rounded-xl overflow-hidden shadow-lg relative group hover:outline-2 hover:outline-zinc-100 hover:shadow-lg hover-transition">
-                    <Image
+                    {/* <Image
                         src={`https://image.tmdb.org/t/p/w500${movieData.poster_path}`}
                         width={500}
                         height={750}
                         alt={movieData.title}
                         className="w-full h-auto object-cover"
-                    />
+                    /> */}
+                    {movieData.poster_path ?
+                        (<Image src={`https://image.tmdb.org/t/p/w500${movieData.poster_path}`}
+                            width={100}
+                            height={100}
+                            alt={`${movieData.title} image`}
+                            loading='lazy'
+                            className='w-full h-auto object-cover'
+                        />) :
+                        (
+                            <div className="flex flex-col items-center justify-center bg-zinc-900 text-white w-full h-[592px]">
+                                <CiImageOff className="size-16 mb-2" />
+                                <span className="text-lg">Unavailable image</span>
+                                <span className="text-sm mt-2 text-zinc-500">Movie Title: {movieData.title}</span>
+                            </div>)}
                     <div className='absolute inset-0 bg-zinc-950/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-40' />
 
                     <div className='absolute inset-0 flex items-center justify-center gap-x-4 text-zinc-200 text-5xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-50'>

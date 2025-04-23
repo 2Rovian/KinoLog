@@ -6,6 +6,8 @@ import { MotionDiv } from './MotionDiv';
 import { FaInfoCircle } from "react-icons/fa";
 import { CiBookmark } from "react-icons/ci";
 import { FaStar } from "react-icons/fa";
+import { CiImageOff } from "react-icons/ci";
+
 import Link from 'next/link';
 
 const variants = {
@@ -26,17 +28,25 @@ export default function MoviesArticle({ movie, index }: any) {
             }}
             viewport={{ amount: 0 }}
         >
-            <Image src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-                width={100}
-                height={100}
-                alt={`${movie.title} image`}
-                loading='lazy'
-                className='max-h-64 w-full sm:max-h-full object-cover'
-            />
+            {movie.poster_path ?
+                (<Image src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+                    width={100}
+                    height={100}
+                    alt={`${movie.title} image`}
+                    loading='lazy'
+                    className='max-h-64 w-full sm:max-h-full object-cover'
+                />) :
+                (
+                    <div className="flex flex-col items-center justify-center bg-zinc-900 text-white size-full">
+                        <CiImageOff className="size-16 mb-2" />
+                        <span className="text-lg">Unavailable image</span>
+                        <span className="text-sm mt-2 text-zinc-500">Movie Title: {movie.title}</span>
+                    </div>)}
+
             <div className='absolute top-1 right-1 bg-zinc-950 px-2 py-1 rounded-xl flex items-center z-50'>
                 <span className="flex gap-x-1 items-center text-amber-500">
                     <FaStar />
-                    
+
                     {movie.vote_average === 0
                         ? "N/A"
                         : movie.vote_average.toFixed(1)}
