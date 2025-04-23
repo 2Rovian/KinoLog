@@ -7,13 +7,22 @@ import { IoLogoVercel } from "react-icons/io5";
 import { RiNextjsFill } from "react-icons/ri";
 import { SiTypescript } from "react-icons/si";
 
+import { Zen_Antique } from "next/font/google";
+
+const ZenAntiqueFont = Zen_Antique({
+    subsets: ["latin"],
+    weight: "400"
+})
+
 export default function AboutPage() {
     return (
         <div className="max-w-4xl mx-auto px-4 py-12">
             {/* Header */}
             <div className="text-center mb-16">
                 <h1 className="mt-8 text-5xl font-bold text-amber-500 mb-2">
-                    About <span className="font-serif text-white">KinoLog</span>
+                    About <span className={`${ZenAntiqueFont.className} text-white`}
+                    style={{ textShadow: "0 0 1px white" }}
+                    >KinoLog</span>
                 </h1>
                 <p className="text-lg text-zinc-400 max-w-2xl mx-auto">
                     Your ultimate destination for discovering and tracking movies & TV series

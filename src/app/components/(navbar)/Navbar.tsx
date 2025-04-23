@@ -5,6 +5,13 @@ import UL_Navbar from "./UL_Navbar";
 import SearchNavbar from "./SearchNavbar";
 import Link from "next/link";
 
+import { Zen_Antique } from "next/font/google";
+
+const ZenAntiqueFont = Zen_Antique({
+    subsets: ["latin"],
+    weight: "400"
+})
+
 export default function Navbar() {
     const navItems: any = [
         { title: "Home", link_page: "/" },
@@ -20,7 +27,9 @@ export default function Navbar() {
                 {/* old navbar */}
                 <div className="h-[50%] flex justify-between items-center">
                     <Link href='/'>
-                        <span className="text-2xl font-serif font-semibold cursor-pointer text-slate-50">KinoLog</span>
+                        <span className={`text-2xl ${ZenAntiqueFont.className} cursor-pointer text-slate-50`}
+                        style={{ textShadow: "0 0 1px white" }}
+                        >KinoLog</span>
                     </Link>
 
                     <MenuNavbar navItems={navItems} />
