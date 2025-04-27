@@ -6,6 +6,7 @@ import { CiBookmark } from "react-icons/ci";
 import Link from "next/link";
 import NotFoundPage from '@/app/not-found';
 import { CiImageOff } from "react-icons/ci";
+import BookmarkButton from '@/app/BookmarkButton';
 
 export default async function MovieDetails({
     params,
@@ -48,9 +49,7 @@ export default async function MovieDetails({
                     <div className='absolute inset-0 bg-zinc-950/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-40' />
 
                     <div className='absolute inset-0 flex items-center justify-center gap-x-4 text-zinc-200 text-5xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-50'>
-                        <span className="cursor-pointer hover:text-white transition-colors">
-                            <CiBookmark />
-                        </span>
+                        <BookmarkButton media_id={movieData.id}/>
 
                     </div>
                 </div>
@@ -60,10 +59,10 @@ export default async function MovieDetails({
                     <div className="flex justify-between items-center">
                         <h1 className="text-4xl font-bold">{movieData.title}</h1>
 
-                        <button className="px-4 py-2 bg-zinc-200 hover:bg-white text-black rounded-md transition-all text-md cursor-pointer">
+                        {/* <button className="px-4 py-2 bg-zinc-200 hover:bg-white text-black rounded-md transition-all text-md cursor-pointer">
                             <CiBookmark />
 
-                        </button>
+                        </button> */}
                     </div>
 
                     <div className="flex items-center gap-4 text-sm text-zinc-300">

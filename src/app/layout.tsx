@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import Navbar from "./components/(navbar)/Navbar";
+import { Toaster } from 'react-hot-toast';
 
 export const metadata: Metadata = {
   title: "KinoLog - your place to find some movies",
@@ -21,6 +22,7 @@ export default function RootLayout({
         <div className="">
           {children}
         </div>
+        <Toaster position="bottom-right"/>
       </body>
     </html>
   );

@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { FaInfoCircle, FaStar } from "react-icons/fa";
 import { CiBookmark } from "react-icons/ci";
 import { MotionDiv } from './MotionDiv';
+import BookmarkButton from '../BookmarkButton';
 
 const variants = {
     hidden: { opacity: 0 },
@@ -50,9 +51,7 @@ export default function SeriesArticle({ series, index }: any) {
                     </span>
                 </Link>
 
-                <span className="cursor-pointer hover:text-white transition-colors">
-                    <CiBookmark />
-                </span>
+                <BookmarkButton media_id={series.id}/>
             </div>
         </MotionDiv>
     )

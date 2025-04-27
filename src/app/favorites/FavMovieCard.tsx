@@ -1,24 +1,23 @@
 // "use client"
 // import { motion } from 'framer-motion';
 import Image from 'next/image'
-import { MotionDiv } from './MotionDiv';
 
 import { FaInfoCircle } from "react-icons/fa";
-import { CiBookmark } from "react-icons/ci";
+
 import { FaStar } from "react-icons/fa";
 import { CiImageOff } from "react-icons/ci";
-
+import { IoTrashOutline } from "react-icons/io5";
 import Link from 'next/link';
-import BookmarkButton from '../BookmarkButton';
+import { MotionDiv } from '../components/MotionDiv';
 
 const variants = {
     hidden: { opacity: 0 },
     visible: { opacity: 1 }
 }
 
-export default function MoviesArticle({ movie, index }: any) {
+export default function FavMovieCard({ movie, index }: any) {
     return (
-        <MotionDiv className="overflow-hidden rounded-sm relative group hover:outline-2 hover:outline-zinc-100 hover:scale-105 hover:shadow-lg hover-transition"
+        <MotionDiv className="overflow-hidden rounded-sm relative group hover:outline-2 hover:outline-zinc-100  hover-transition cursor-pointer"
             variants={variants}
             initial="hidden"
             animate="visible"
@@ -42,9 +41,18 @@ export default function MoviesArticle({ movie, index }: any) {
                         <CiImageOff className="size-16 mb-2" />
                         <span className="text-lg">Unavailable image</span>
                         <span className="text-sm mt-2 text-zinc-500">Movie Title: {movie.title}</span>
-                    </div>)}
+                    </div>
+                )}
+
+            {/* <div className='absolute top-1 left-1 bg-zinc-950/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl flex items-center z-50 overflow-hidden'>
+                <button className='py-2 px-3 text-red-500 hover:text-red-700 transition-colors'>
+                    <IoTrashOutline />
+                </button>
+
+            </div> */}
 
             <div className='absolute top-1 right-1 bg-zinc-950 px-2 py-1 rounded-xl flex items-center z-50'>
+
                 <span className="flex gap-x-1 items-center text-amber-500">
                     <FaStar />
 
@@ -54,6 +62,7 @@ export default function MoviesArticle({ movie, index }: any) {
 
                 </span>
             </div>
+
             <div className='absolute inset-0 bg-zinc-950/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-40' />
 
             <div className='absolute inset-0 flex items-center justify-center gap-x-4 text-zinc-200 text-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-50'>
@@ -63,53 +72,11 @@ export default function MoviesArticle({ movie, index }: any) {
                     </span>
                 </Link>
 
-                <BookmarkButton media_id={movie.id}/>
+                {/* <BookmarkButton media_id={movie.id}/> */}
 
             </div>
         </MotionDiv>
 
-        // <motion.article className="overflow-hidden rounded-sm relative"
-        // variants={variants}
-        // initial="hidden"
-        // animate="visible"
-        // transition={{
-        //     delay: 1,
-        //     ease: 'easeInOut',
-        //     duration: 0.5
-        // }}
-        // viewport={{ amount: 0 }}
-        // >
-        //     <Image src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-        //         width={100}
-        //         height={100}
-        //         alt={`${movie.title} image`}
-        //         loading='lazy'
-        //         className='max-h-64 w-full sm:max-h-full object-cover'
-        //     />
-        //     <div className='absolute top-1 right-1 bg-zinc-950 px-2 py-1 rounded-xl flex items-center'>
-        //         <span className="flex gap-x-1 items-center text-amber-500">
-        //             <FaStar />
-        //             {(movie.vote_average).toFixed(1)}
-        //         </span>
-        //     </div>
-        // </motion.article>
 
-        // <article className="overflow-hidden rounded-sm relative"
-
-        // >
-        //     <Image src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-        //         width={100}
-        //         height={100}
-        //         alt={`${movie.title} image`}
-        //         loading='lazy'
-        //         className='max-h-64 w-full sm:max-h-full object-cover'
-        //     />
-        //     <div className='absolute top-1 right-1 bg-zinc-950 px-2 py-1 rounded-xl flex items-center'>
-        //         <span className="flex gap-x-1 items-center text-amber-500">
-        //             <FaStar />
-        //             {(movie.vote_average).toFixed(1)}
-        //         </span>
-        //     </div>
-        // </article>
     )
 }
