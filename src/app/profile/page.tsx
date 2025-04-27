@@ -13,7 +13,7 @@ export default function ProfilePage() {
             // 1. Busca a sessão
             const { data: { session } } = await supabase.auth.getSession();
             setSession(session);
-
+            console.log(session)
             if (session) {
                 // 2. Se sessão existe, busca o perfil
                 const { data: profileData } = await supabase
@@ -56,6 +56,7 @@ export default function ProfilePage() {
         <>
             <div className="">
                 <main className="mt-20 mx-auto max-w-7xl px-4">
+                    <p>User id: {session?.user?.id}</p>
                     {profile &&
                         (<>
                             <h1 className="font-semibold text-lg">Welcome, {profile.username ? profile.username : profile.email}

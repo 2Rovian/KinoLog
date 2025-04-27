@@ -9,6 +9,7 @@ import { CiImageOff } from "react-icons/ci";
 import { IoTrashOutline } from "react-icons/io5";
 import Link from 'next/link';
 import { MotionDiv } from '../components/MotionDiv';
+import DeleteButton from '../DeleteButton';
 
 const variants = {
     hidden: { opacity: 0 },
@@ -17,7 +18,7 @@ const variants = {
 
 export default function FavMovieCard({ movie, index }: any) {
     return (
-        <MotionDiv className="overflow-hidden rounded-sm relative group hover:outline-2 hover:outline-zinc-100  hover-transition cursor-pointer"
+        <MotionDiv className="overflow-hidden rounded-sm relative group hover:outline-2 hover:outline-zinc-100  hover-transition "
             variants={variants}
             initial="hidden"
             animate="visible"
@@ -44,12 +45,10 @@ export default function FavMovieCard({ movie, index }: any) {
                     </div>
                 )}
 
-            {/* <div className='absolute top-1 left-1 bg-zinc-950/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl flex items-center z-50 overflow-hidden'>
-                <button className='py-2 px-3 text-red-500 hover:text-red-700 transition-colors'>
-                    <IoTrashOutline />
-                </button>
+            <div className='absolute top-1 left-1 bg-zinc-950/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl flex items-center overflow-hidden'>
+                <DeleteButton media_id={movie.id} />
 
-            </div> */}
+            </div>
 
             <div className='absolute top-1 right-1 bg-zinc-950 px-2 py-1 rounded-xl flex items-center z-50'>
 
