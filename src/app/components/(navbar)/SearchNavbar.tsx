@@ -7,6 +7,7 @@ import MoviesArticle from "../MoviesArticle";
 import { useInView } from "react-intersection-observer";
 import Link from "next/link";
 import { supabase } from "@/app/supabase-client";
+import UserDropdown from "./UserDropdown";
 
 export default function SearchNavbar() {
     const [openSearch, setOpenSearch] = useState<boolean>(false);
@@ -118,16 +119,22 @@ export default function SearchNavbar() {
 
     return (
         <>
-            <div className="flex gap-x-2 text-2xl font-bold cursor-pointer items-center">
+            <div className="flex gap-x-2 text-2xl font-bold items-center">
                 <span
-                    className="p-1 hover:text-white transition-colors"
+                    className="p-1 hover:text-white transition-colors cursor-pointer"
                     onClick={() => setOpenSearch(true)}
                 >
                     <IoIosSearch />
                 </span>
-                <Link href={session ? '/profile' : '/login'} className="rounded-full outline-2 p-1 transition-colors">
+                {/* <Link href={session ? '/profile' : '/login'} className="rounded-full outline-2 p-1 transition-colors">
                     <CiUser />
-                </Link>
+                </Link> */}
+                {session ? <UserDropdown /> :
+                    <Link href='/login' className="rounded-full outline-2 p-1 transition-colors">
+                        <CiUser />
+                    </Link>
+                }
+
             </div>
 
             {openSearch && (
