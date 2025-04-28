@@ -6,6 +6,7 @@ import { IoClose } from "react-icons/io5";
 import MoviesArticle from "../MoviesArticle";
 import { useInView } from "react-intersection-observer";
 import Link from "next/link";
+import { supabase } from "@/app/supabase-client";
 
 export default function SearchNavbar() {
     const [openSearch, setOpenSearch] = useState<boolean>(false);
@@ -17,6 +18,19 @@ export default function SearchNavbar() {
     const { ref, inView } = useInView();
     const searchTimeoutRef = useRef<NodeJS.Timeout | null>(null);
     const searchRef = useRef<HTMLDivElement>(null);
+
+    const [session, setSession] = useState<any>(null);
+
+    // confere se o usuário está logado
+    useEffect(() => {
+        const fetchSession = async () => {
+            const { data: { session } } = await supabase.auth.getSession();
+            setSession(session);
+
+        };
+
+        fetchSession();
+    }, []);
 
     // Close when clicking outside
     useEffect(() => {
@@ -111,7 +125,7 @@ export default function SearchNavbar() {
                 >
                     <IoIosSearch />
                 </span>
-                <Link href='/login' className="rounded-full outline-2 p-1 transition-colors">
+                <Link href={session ? '/profile' : '/login'} className="rounded-full outline-2 p-1 transition-colors">
                     <CiUser />
                 </Link>
             </div>

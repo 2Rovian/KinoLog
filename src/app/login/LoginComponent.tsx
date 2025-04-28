@@ -1,14 +1,54 @@
 'use client'
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import ProvidersComponent from "./ProvidersComponent";
 import toast from "react-hot-toast";
 import { supabase } from "../supabase-client";
+import Link from "next/link";
 
 export default function LoginComponent() {
     const [isLogin, setIsLogin] = useState<boolean>(true);
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
     const [ConfirmPassword, setConfirmPassword] = useState<string>('');
+    const [session, setSession] = useState<any>(null);
+    const [isLoadingSession, setIsLoadingSession] = useState<boolean>(true);
+
+    useEffect(() => {
+        const fetchSession = async () => {
+            const { data: { session } } = await supabase.auth.getSession();
+            setSession(session);
+            setIsLoadingSession(false); // 👈 só aqui para de carregar
+        };
+        fetchSession();
+    }, []);
+
+    if (isLoadingSession) {
+        return (
+            <div className='flex justify-center mt-32'>
+                <div className="flex justify-center py-6">
+                    <div className="animate-spin rounded-full size-16 border-t-2 border-b-2 border-zinc-100" />
+                </div>
+            </div>
+        );
+    }
+
+    if (session) {
+        return (
+            <div className="flex flex-col items-center justify-center">
+                <div className="mt-36 flex flex-col justify-center ">
+                    <h1 className="text-3xl font-bold text-slate-200 mb-4">You are already logged in</h1>
+                    <p className="text-slate-400 mb-8">Go back to the homepage to continue browsing.</p>
+                    <Link
+                        href="/"
+                        className="bg-slate-800 text-white rounded-lg hover:bg-slate-700 transition-colors self-center font-semibold"
+                    >
+                        <button className="px-6 py-3 rounded-lg cursor-pointer ">Go to Home</button>
+                    </Link>
+                </div>
+            </div>
+        );
+    }
+    
 
     const handleSubmit = async (e: any) => {
         e.preventDefault();
@@ -54,6 +94,7 @@ export default function LoginComponent() {
         }
 
     }
+
     return (
         <div className="flex flex-col items-center mx-auto ">
             <div className="mt-20 border border-slate-400 text-slate-950 flex flex-col p-5 w-[90%] max-w-[500px] bg-zinc-100 rounded-xl shadow-md relative">

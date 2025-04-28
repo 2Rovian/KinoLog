@@ -2,11 +2,13 @@
 import { useEffect, useState } from "react";
 import { supabase } from "../supabase-client";
 import toast from "react-hot-toast";
+import Link from "next/link";
 
 export default function ProfilePage() {
     const [session, setSession] = useState<any>(null);
     const [profile, setProfile] = useState<any>(null);
     const [usernameInput, setUsernameInput] = useState<string>('');
+    const [isLoadingSession, setIsLoadingSession] = useState<boolean>(true);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -23,11 +25,22 @@ export default function ProfilePage() {
                     .single();
 
                 setProfile(profileData);
+                setIsLoadingSession(false);
             }
         };
 
         fetchData();
     }, []);
+
+    if (isLoadingSession) {
+        return (
+            <div className='flex justify-center mt-32'>
+                <div className="flex justify-center py-6">
+                    <div className="animate-spin rounded-full size-16 border-t-2 border-b-2 border-zinc-100" />
+                </div>
+            </div>
+        );
+    }
 
     const handleLogout = async () => {
         await supabase.auth.signOut();
@@ -52,64 +65,68 @@ export default function ProfilePage() {
         toast.success("Username atualizado com sucesso!");
     }
 
-    return (
-        <>
-            <div className="">
-                <main className="mt-20 mx-auto max-w-7xl px-4">
-                    <p>User id: {session?.user?.id}</p>
-                    {profile &&
-                        (<>
-                            <h1 className="font-semibold text-lg">Welcome, {profile.username ? profile.username : profile.email}
-                            </h1>
-                            <p>Would you like to put some username?</p>
-                            <div className="flex gap-x-2 items-center mt-4">
-                                <input type="text" placeholder="username" className="pl-2 py-1 rounded-md outline-2 outline-slate-400 "
-                                    value={usernameInput}
-                                    onChange={(e) => setUsernameInput(e.target.value)}
-                                />
-                                <button className="bg-zinc-300 py-1 rounded-md px-4 text-slate-950 font-semibold cursor-pointer hover:bg-zinc-200 hover-transition"
-                                    onClick={handleInsertUsername}
-                                >Confirm</button>
-                            </div>
-                            <button
-                                className="px-5 py-1 rounded-md bg-zinc-200 text-slate-950 mt-4 font-semibold cursor-pointer hover:bg-zinc-200 hover-transition"
-                                onClick={handleLogout}
-                            >
-                                Logout
-                            </button>
-                        </>)}
-
-                </main>
-
-            </div>
-
-
-            {/* <div className="text-center">
-                <h1 className="mt-20">Welcome</h1>
-                {session ? (
-                    <>
-                        <p>Session loaded</p>
-                        {profile && (
-                            <div className="mt-4">
-                                <p>Email: {profile.email}</p>
-                                <p>Username: {profile.username || "Not set"}</p>
-                            </div>
-                        )}
-                    </>
-                ) : (
-                    <p>No session</p>
-                )}
-
-                {session && (
-                    <button
-                        className="px-5 py-1 rounded-md bg-zinc-200 text-slate-950 mt-4 cursor-pointer"
-                        onClick={handleSubmit}
+    if (!session || !profile) {
+        return (
+            <div className="flex flex-col items-center justify-center">
+                <div className="mt-20 flex flex-col justify-center ">
+                    <h1 className="text-3xl font-bold text-slate-200 mb-4">You must be logged in to access your profile</h1>
+                    <p className="text-slate-400 mb-8">Please log in to continue.</p>
+                    <Link
+                        href="/login"
+                        className="px-6 py-3 bg-slate-800 text-white rounded-lg hover:bg-slate-700 transition-colors font-semibold text-center"
                     >
-                        Logout
-                    </button>
-                )}
-            </div> */}
-        </>
+                        Go to Login
+                    </Link>
+                </div>
+            </div>
+        );
+    }
 
-    );
+    return (
+        <div className="flex items-center justify-center min-h-screen bg-zinc-950 text-slate-900">
+          <main className="bg-white rounded-xl shadow-lg p-10 w-[85%] max-w-[500px]">
+            <div className="text-center mb-8">
+              <h1 className="text-2xl font-bold">Hello, {profile.username ? profile.username : profile.email}!</h1>
+              <p className="text-sm text-slate-500 mt-2">Manage your account information below.</p>
+            </div>
+      
+            <div className="flex flex-col gap-5">
+              <div>
+                <label htmlFor="username" className="block text-sm font-medium text-slate-700 mb-2">
+                  New Username
+                </label>
+                <input
+                  id="username"
+                  type="text"
+                  placeholder="Enter a username"
+                  className="w-full p-3 rounded-md border border-slate-300 focus:outline-none focus:ring-2 focus:ring-slate-900 transition"
+                  value={usernameInput}
+                  onChange={(e) => setUsernameInput(e.target.value)}
+                />
+              </div>
+      
+              <button
+                onClick={handleInsertUsername}
+                className="w-full bg-slate-900 hover:bg-slate-700 text-white font-semibold py-3 rounded-md transition cusor-pointer"
+              >
+                Update Username
+              </button>
+      
+              <button
+                onClick={handleLogout}
+                className="w-full border border-slate-300 text-slate-700 hover:bg-red-800 hover:text-white font-semibold py-3 rounded-md transition cursor-pointer"
+              >
+                Logout
+              </button>
+            </div>
+      
+            {/* <div className="mt-10 text-center">
+              <p className="text-xs text-slate-400">User ID:</p>
+              <p className="text-xs font-mono text-slate-600 mt-1">{session?.user?.id}</p>
+            </div> */}
+          </main>
+        </div>
+      );
+      
+      
 }

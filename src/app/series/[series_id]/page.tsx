@@ -5,6 +5,7 @@ import { CiBookmark } from "react-icons/ci";
 import Link from "next/link";
 import SeasonsComp from './SeasonsComp';
 import NotFoundPage from '@/app/not-found';
+import BookmarkButton from '@/app/BookmarkButton';
 
 export default async function SeriesDetails({
     params,
@@ -36,9 +37,7 @@ export default async function SeriesDetails({
                         />
                         <div className='absolute inset-0 bg-zinc-950/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-40' />
                         <div className='absolute inset-0 flex items-center justify-center gap-x-4 text-zinc-200 text-5xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-50'>
-                            <span className="cursor-pointer hover:text-white transition-colors">
-                                <CiBookmark />
-                            </span>
+                            <BookmarkButton media_id={seriesData.id} />
                         </div>
                     </div>
 
@@ -69,9 +68,7 @@ export default async function SeriesDetails({
                 <div className="md:col-span-2 flex flex-col gap-4">
                     <div className="flex justify-between items-center">
                         <h1 className="text-4xl font-bold">{seriesData.name}</h1>
-                        <button className="px-4 py-2 bg-zinc-200 hover:bg-white text-black rounded-md transition-all text-md cursor-pointer">
-                            <CiBookmark />
-                        </button>
+                        
                     </div>
 
                     <div className="flex items-center gap-4 text-sm text-zinc-300">
